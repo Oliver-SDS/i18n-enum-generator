@@ -1,3 +1,14 @@
 {
-    "es":"Hola, soy un bot de prueba"
+    "es":"Hola, soy un bot de prueba",
+    "en": {
+        "greeting": "Hello, I'm a test bot",
+        "help": "I can help you with the following commands",
+        "help_commands": {
+            "start": "Start the bot",
+            "help": "Show this help",
+            "language": "Change the language",
+            "about": "About the bot"
+        },
+        "about": "I'm a bot created"
+    }
 }

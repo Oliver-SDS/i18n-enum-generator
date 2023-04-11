@@ -6,10 +6,11 @@ import inquirer from "inquirer";
 import fs from "fs";
 import ejs from "ejs";
 import ora from 'ora';
-import { isObject } from "util";
+import flatten from "flat";
 
 let pathFile;
 let fileType;
+let pathOutput = "./";
 
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
@@ -39,6 +40,22 @@ async function askPath() {
     pathFile = answers.path_name;
 }
 
+// async function pathOutputInput() {
+//     console.log(`
+//         Please input the path of the output file that would be build.
+//     `);
+
+//     const answers = await inquirer.prompt({
+//         name: 'path_name',
+//         type: 'input',
+//         message: 'path to output file:',
+//         default() {
+//             return './';
+//         },
+//     });
+//     pathOutput = answers.path_name;
+// }
+
 async function askInput() {
 
     const answers = await inquirer.prompt({
@@ -66,37 +83,21 @@ async function getTemplate() {
     if(fileType === 'js') {
         return `const Translation = {<%- Prefix %>} \n`;
     }else{
-        return `export enum Translation {<%- Prefix %>} \n`;
+        return `export const enum Translation {<%- Prefix %>} \n`;
     }
-}
-
-//TODO: refactor this function
-function getKey (key, object) {
-    let array = [];
-    if (typeof object[key] === 'object') {
-        Object.keys(object[key]).forEach((key) => {
-            getKey(key, object[key]).forEach((key3) => {
-                array = [...array, `${key}_${key3}`];
-            });
-        });    
-        `${key}_${getKey()}`;
-    } else {
-        array.push(key);
-    }
-
-    return array;
 }
 
 function format(key) {
     if(fileType === 'js') {
-        return `${key.toUpperCase()}: '${key}', `;
+        return `${key.replaceAll(".","_").toUpperCase()}: '${key}', `;
     }else{
-        return `${key.toUpperCase()} = '${key}', `;
+        return `${key.replaceAll(".","_").toUpperCase()} = '${key}', `;
     }
 }
 
 async function generator(object) {
-    var keys = Object.keys(object);
+    const flattenObject = flatten(object)
+    var keys = Object.keys(flattenObject);
     let result = ""
     keys.forEach((key) => {
         const formatResult = format(key);
@@ -115,7 +116,7 @@ async function readJson() {
         const result = await generator(object)
         let output = ejs.render(TEMPLATE, {Prefix: result});
         
-        fs.writeFile("./static."+fileType, output, "utf8", (error, data) => {
+        fs.writeFile(pathOutput+"static."+fileType, output, "utf8", (error, data) => {
             done(spinner,true,"")
         });
         
@@ -130,4 +131,5 @@ console.clear();
 await welcome();
 await askPath();
 await askInput();
+// await pathOutputInput();
 await readJson();

@@ -1,1 +1,1 @@
-export enum Translation { ES = 'es', } 
+export const enum Translation { ES = 'es',  EN_GREETING = 'en.greeting',  EN_HELP = 'en.help',  EN_HELP_COMMANDS_START = 'en.help_commands.start',  EN_HELP_COMMANDS_HELP = 'en.help_commands.help',  EN_HELP_COMMANDS_LANGUAGE = 'en.help_commands.language',  EN_HELP_COMMANDS_ABOUT = 'en.help_commands.about',  EN_ABOUT = 'en.about', } 
