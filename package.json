@@ -1,7 +1,7 @@
 {
   "name": "i18n-enum-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "i18n enum generator npm package",
   "main": "index.js",
   "type": "module",
   "scripts": {
