@@ -1,0 +1,1 @@
+const Translation = { ES: 'es', } 

@@ -1,0 +1,29 @@
+{
+  "name": "i18n-enum-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OliverSDS/i18n-enum-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OliverSDS/i18n-enum-generator/issues"
+  },
+  "homepage": "https://github.com/OliverSDS/i18n-enum-generator#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "chalk-animation": "^2.0.3",
+    "ejs": "^3.1.9",
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.1.5",
+    "ora": "^6.3.0"
+  }
+}
